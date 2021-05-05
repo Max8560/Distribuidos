@@ -5,8 +5,10 @@ import java.io.InputStreamReader;
 public class ClienteRMI{
 	public static void main(String[] args) throws Exception{
 		String url = "rmi://10.0.0.5/tarea6";
+		String url2 = "rmi://10.0.0.6/tarea6";
 
 		InterfaceRMI r = (InterfaceRMI)Naming.lookup(url);
+		InterfaceRMI r2 = (InterfaceRMI)Naming.lookup(url2);
 
 		BufferedReader entrada = new BufferedReader(new InputStreamReader(System.in));
 
@@ -34,19 +36,19 @@ public class ClienteRMI{
 
 		float[][] a1 = r.separa_matriz(a,0,n);
 		float[][] a2 = r.separa_matriz(a,n/2,n);
-		float[][] b1 = r.separa_matriz(b,0,n);
-		float[][] b2 = r.separa_matriz(b,n/2,n);
+		float[][] b1 = r2.separa_matriz(b,0,n);
+		float[][] b2 = r2.separa_matriz(b,n/2,n);
 
 		float[][] c1 = r.multiplica_matrices(a1,b1,n);
 		float[][] c2 = r.multiplica_matrices(a1,b2,n);
-		float[][] c3 = r.multiplica_matrices(a2,b1,n);
-		float[][] c4 = r.multiplica_matrices(a2,b2,n);
+		float[][] c3 = r2.multiplica_matrices(a2,b1,n);
+		float[][] c4 = r2.multiplica_matrices(a2,b2,n);
 
 		float[][] c = new float[n][n];
 		c = r.acomoda_matriz(c,c1,0,0,n);
 		c = r.acomoda_matriz(c,c2,0,n/2,n);
-		c = r.acomoda_matriz(c,c3,n/2,0,n);
-		c = r.acomoda_matriz(c,c4,n/2,n/2,n);
+		c = r2.acomoda_matriz(c,c3,n/2,0,n);
+		c = r2.acomoda_matriz(c,c4,n/2,n/2,n);
 
 		if (n == 8) {
 			System.out.println("Matriz A");
